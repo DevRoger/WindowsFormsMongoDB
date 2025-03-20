@@ -33,6 +33,8 @@
             this.borrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewCiudades = new System.Windows.Forms.DataGridView();
+            this.txtBusqueda = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCiudades)).BeginInit();
             this.SuspendLayout();
@@ -72,19 +74,42 @@
             // 
             // dataGridViewCiudades
             // 
+            this.dataGridViewCiudades.AllowUserToAddRows = false;
+            this.dataGridViewCiudades.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridViewCiudades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCiudades.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridViewCiudades.Location = new System.Drawing.Point(12, 27);
+            this.dataGridViewCiudades.Location = new System.Drawing.Point(12, 58);
             this.dataGridViewCiudades.Name = "dataGridViewCiudades";
-            this.dataGridViewCiudades.Size = new System.Drawing.Size(359, 299);
+            this.dataGridViewCiudades.Size = new System.Drawing.Size(359, 268);
             this.dataGridViewCiudades.TabIndex = 1;
             this.dataGridViewCiudades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCiudades_CellDoubleClick);
+            // 
+            // txtBusqueda
+            // 
+            this.txtBusqueda.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtBusqueda.Location = new System.Drawing.Point(65, 32);
+            this.txtBusqueda.Name = "txtBusqueda";
+            this.txtBusqueda.Size = new System.Drawing.Size(306, 20);
+            this.txtBusqueda.TabIndex = 2;
+            this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Buscar:";
             // 
             // FormCiudades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 338);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtBusqueda);
             this.Controls.Add(this.dataGridViewCiudades);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -108,6 +133,8 @@
         private System.Windows.Forms.ToolStripMenuItem borrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridViewCiudades;
+        private System.Windows.Forms.TextBox txtBusqueda;
+        private System.Windows.Forms.Label label1;
     }
 }
 

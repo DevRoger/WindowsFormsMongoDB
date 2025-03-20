@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsMongoDB.Models;
 using WindowsFormsMongoDB.Services;
@@ -58,20 +53,53 @@ namespace WindowsFormsMongoDB
         /// </summary>
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
+            // Validar que el nombre no esté vacío o contenga solo espacios en blanco
+            if (string.IsNullOrWhiteSpace(textBoxNombre.Text))
+            {
+                MessageBox.Show("El nombre de la ciudad no puede estar vacío.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salir sin continuar con la inserción o actualización
+            }
+
             // Actualizamos el objeto ciudad con el valor del TextBox
-            ciudad.Nombre = textBoxNombre.Text;
+            ciudad.Nombre = textBoxNombre.Text.Trim(); // Trim() para eliminar espacios en blanco al inicio y fin
 
-            // Ejecutamos la operación correspondiente (insertar o actualizar)
-            if (insert)
+            // Verificar si la ciudad ya existe
+            if (CiudadExiste(ciudad.Nombre))
             {
-                CiudadesCollection.Insert(ciudad);
-            }
-            else
-            {
-                CiudadesCollection.Update(ciudad);
+                MessageBox.Show("Ya existe una ciudad con ese nombre. Intenta con otro nombre.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;  // No continuar con la inserción
             }
 
-            this.Close();  // Cerramos el formulario
+            try
+            {
+                // Ejecutamos la operación correspondiente: insertar o actualizar
+                if (insert)
+                {
+                    CiudadesCollection.Insert(ciudad);  // Insertar nueva ciudad
+                }
+                else
+                {
+                    CiudadesCollection.Update(ciudad);  // Actualizar ciudad existente
+                }
+                this.Close();  // Cerramos el formulario
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores: si ocurre algún problema al insertar o actualizar
+                MessageBox.Show($"Error al guardar la ciudad: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Verifica si una ciudad con el nombre dado ya existe.
+        /// </summary>
+        /// <param name="nombreCiudad">Nombre de la ciudad a verificar</param>
+        /// <returns>Verdadero si la ciudad existe, falso si no existe</returns>
+        private bool CiudadExiste(string nombreCiudad)
+        {
+            // Buscar si el nombre de la ciudad ya existe en la base de datos o en la lista
+            var ciudades = CiudadesCollection.GetAll(); // Obtener todas las ciudades (esto se puede optimizar si ya tienes la lista)
+            return ciudades.Any(c => c.Nombre.Equals(nombreCiudad, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>
