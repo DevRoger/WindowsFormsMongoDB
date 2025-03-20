@@ -87,7 +87,7 @@ namespace WindowsFormsMongoDB
             {
                 // Preguntar al usuario si realmente desea eliminar la ciudad
                 DialogResult resultado = MessageBox.Show(
-                    "¿Estás seguro de que deseas borrar la ciudad seleccionada?",
+                    $"¿Estás seguro de que deseas borrar la ciudad '{ciudad.Nombre}'?",
                     "Confirmar borrado",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);

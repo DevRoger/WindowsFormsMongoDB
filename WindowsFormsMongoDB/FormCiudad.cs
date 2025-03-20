@@ -76,6 +76,7 @@ namespace WindowsFormsMongoDB
                 if (insert)
                 {
                     CiudadesCollection.Insert(ciudad);  // Insertar nueva ciudad
+                    MessageBox.Show($"La ciudad '{ciudad.Nombre}' se ha agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
