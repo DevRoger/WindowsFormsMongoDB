@@ -39,6 +39,8 @@ namespace WindowsFormsMongoDB
             List<Ciudad> ciudades = CiudadesCollection.GetAll();
             dataGridViewCiudades.DataSource = null;
             dataGridViewCiudades.DataSource = ciudades;
+
+            dataGridViewCiudades.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void dataGridViewCiudades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -53,8 +55,19 @@ namespace WindowsFormsMongoDB
         private void borrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Ciudad ciudad = dataGridViewCiudades.CurrentRow.DataBoundItem as Ciudad;
-            CiudadesCollection.Delete(ciudad);
-            ActualizarDataGridView();
+
+            // Preguntar confirmación al usuario
+            DialogResult resultado = MessageBox.Show(
+                "¿Estás seguro de que deseas borrar la ciudad seleccionada?",
+                "Confirmar borrado",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                CiudadesCollection.Delete(ciudad);
+                ActualizarDataGridView();
+            }
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
